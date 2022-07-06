@@ -1,9 +1,7 @@
 import { RepositoryItem } from "./RepositoryItem";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import '../styles/repositories.scss';
-
-// https://api.github.com/users/isabeladuarte/repos
 
 const repository = {
     name: 'unform',
@@ -12,7 +10,13 @@ const repository = {
 }
 
 export function RepositoryList() {
-    const [] = useState([])
+    const [repositories, setRepositories] = useState([])
+
+    useEffect(() => {
+        fetch('https://api.github.com/users/isabeladuarte/repos')
+            .then(response => response.json())
+            .then(data => console.log(data))
+    }, [])
 
     return (
         <section className="repository-list">
